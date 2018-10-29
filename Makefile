@@ -1,4 +1,4 @@
-.PHONE: clean build image
+.PHONE: clean build image docker-push
 
 REGISTRY=torosio/toros
 
@@ -13,3 +13,8 @@ dist/toros: $(shell find . -type f -name '*.go')
 
 image: dist/toros
 	docker build -f Dockerfile -t $(REGISTRY) .
+
+### RELEASING
+
+docker-push: image
+	docker push ${REGISTRY}
